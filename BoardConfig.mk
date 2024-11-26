@@ -88,3 +88,7 @@ TARGET_USES_MKE2FS := true
 
 ## Inherit partitions flags
 include device/realme/RMX3261/partitions.mk
+
+#flags
+include device/realme/RMX3261/TW_flags.mk
+
