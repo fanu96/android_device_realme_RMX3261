@@ -39,3 +39,5 @@ TARGET_USES_64_BIT_BINDER := true
 # Platform
 TARGET_BOARD_PLATFORM := ums512
 
+## Inherit partitions flags
+include device/realme/RMX3261/partitions.mk
