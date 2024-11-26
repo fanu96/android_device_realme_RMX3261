@@ -72,5 +72,11 @@ BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 2
 # Platform
 TARGET_BOARD_PLATFORM := ums512
 
+# Recovery
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+BOARD_USES_RECOVERY_AS_BOOT := true
+TARGET_NO_RECOVERY := true
+TARGET_USES_MKE2FS := true
+
 ## Inherit partitions flags
 include device/realme/RMX3261/partitions.mk
