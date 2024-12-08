@@ -2,9 +2,9 @@ name: TWRP CI
 
 on:
   push:
-    branches: [ "android-11" ]  # Adjust to your branch
+    branches: [ "android-12.1" ]  # Adjust to your branch
   pull_request:
-    branches: [ "android-11" ]
+    branches: [ "android-12.1" ]
 
 jobs:
   build:
@@ -27,8 +27,8 @@ jobs:
 
     - name: Initialize Repo
       run: |
-        git clone https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git --depth=1 -b twrp-11.0 .repo/manifests
-        repo init -u .repo/manifests -b twrp-11.0
+        git clone https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git --depth=1 -b twrp-12.1 .repo/manifests
+        repo init -u .repo/manifests -b twrp-12.1
         repo sync --force-sync --no-tags --no-clone-bundle -j$(nproc)
 
     - name: Configure Build Environment
