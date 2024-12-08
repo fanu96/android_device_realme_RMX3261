@@ -2,9 +2,9 @@ name: TWRP CI
 
 on:
   push:
-    branches: [ "android-12.1" ]
+    branches: [ "android-11" ]
   pull_request:
-    branches: [ "android-12.1" ]
+    branches: [ "android-11" ]
 
 jobs: 
   build:
