@@ -1,0 +1,47 @@
+name: TWRP CI
+
+on:
+  push:
+    branches: [ "android-12.1" ]  # Adjust to your branch
+  pull_request:
+    branches: [ "android-12.1" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v3
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          bc bison build-essential curl flex \
+          g++-multilib gcc-multilib git gnupg gperf \
+          libncurses5-dev libsdl1.2-dev libssl-dev \
+          libxml2 libxml2-utils lzop pngcrush rsync \
+          schedtool squashfs-tools xsltproc zip zlib1g-dev \
+          python-is-python3 unzip openjdk-8-jdk repo
+
+    - name: Initialize Repo
+      run: |
+        git clone https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git --depth=1 -b twrp-12.1 .repo/manifests
+        repo init -u .repo/manifests -b twrp-12.1
+        repo sync --force-sync --no-tags --no-clone-bundle -j$(nproc)
+
+    - name: Configure Build Environment
+      run: |
+        . build/envsetup.sh
+        export ALLOW_MISSING_DEPENDENCIES=true
+        lunch twrp_rmx3263-eng  # Replace <device_codename> with your device's codename
+
+    - name: Build Recovery Image
+      run: make recoveryimage -j$(nproc)
+
+    - name: Upload Recovery Image
+      uses: actions/upload-artifact@v3
+      with:
+        name: recovery.img
+        path: out/target/product/rmx3263/recovery.img
