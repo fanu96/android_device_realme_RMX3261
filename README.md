@@ -69,7 +69,7 @@ repo sync -j$(nproc --all)
 Then add these projects to .repo/manifest.xml:
 
 ```xml
-<project path="device/realme/RMX3261" name="GitFASTBOOT/android_device_realme_RMX3261" remote="github" revision="android-11" />
+<project path="device/realme/RMX3261" name="fanu96/android_device_realme_RMX3261" remote="github" revision="android-11" />
 ```
 
 Finally execute these:
